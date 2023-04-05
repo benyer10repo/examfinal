@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Backend Repository for DEV environment') {
             agent { label 'node-dev' }
             steps {
-                git branch: 'main', url: 'backend----------git'
+                git branch: 'main', url: 'https://github.com/benyer10repo/sisventass.git'
                 echo 'Cloned Backend Project'
             }
         }
@@ -19,28 +19,28 @@ pipeline {
         stage('Clone Frontend Repository for DEV environment') {
             agent { label 'node-dev' }
             steps {
-                git branch: 'main', url: 'fronted-------------git'
+                git branch: 'main', url: 'https://github.com/benyer10repo/frontedm8.git'
                 echo 'Cloned Frontend Project'
             }
         }
         stage('Build frontend for DEV with docker-compose') {
             agent {label 'node-dev'}
             steps {
-                sh 'docker-compose up -d dev'
+                sh 'docker-compose up -d frontend-dev'
                 echo 'Build DEV frontend'
             }
         }
         stage('Clone Frontend Repository for QA environment') {
             agent { label 'node-QA' }
             steps {
-                git branch: 'main', url: 'frontend----------------------------git'
+                git branch: 'main', url: 'https://github.com/benyer10repo/frontedm8.git'
                 echo 'Cloned Frontend Project'
             }
         }
         stage("Run Automation tests in Dockerfile.test QA"){
             agent { label 'node-QA' }
             steps {
-                sh 'docker-compose up -d test'
+                sh 'docker-compose up -d frontend-test'
                 echo 'Build tests passes'
             }
         }
@@ -48,14 +48,14 @@ pipeline {
         stage('Clone Frontend Repository for PROD environment') {
             agent { label 'node-PRO' }
             steps {
-                git branch: 'main', url: 'frontend--------------------git'
+                git branch: 'main', url: 'https://github.com/benyer10repo/frontedm8.git'
                 echo 'Cloned Frontend Project'
             }
         }
         stage('Build frontend for PROD with docker-compose') {
             agent {label 'node-PRO'}
             steps {
-                sh 'docker-compose up -d hero-webapp'
+                sh 'docker-compose up -d frontend-prod'
                 echo 'Build PROD frontend'
             }
         }
