@@ -6,6 +6,7 @@ pipeline {
             agent { label 'node-dev' }
             steps {
                 git branch: 'main', url: 'https://github.com/benyer10repo/sisventass.git'
+                sh 'mv sisventass sisventas'
                 echo 'Cloned Backend Project'
             }
         }
