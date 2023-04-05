@@ -1,7 +1,7 @@
 pipeline {
     agent none
 
-    stages{ /*  
+    stages{   
         stage('Clone Backend Repository for DEV environment') {
             agent { label 'node-dev' }
             steps {
@@ -16,7 +16,7 @@ pipeline {
                 sh 'docker-compose up -d'
                 echo 'Build DEV backend'
             }
-        }*/
+        }/*
         stage('Clone Frontend Repository for DEV environment') {
             agent { label 'node-dev' }
             steps {
@@ -59,6 +59,6 @@ pipeline {
                 sh 'docker-compose up -d frontend-prod'
                 echo 'Build PROD frontend'
             }
-        }
+        }*/
     }
 }
