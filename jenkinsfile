@@ -1,19 +1,19 @@
 pipeline {
-    agent { label 'debian' }
+    agent any
 
     stages{   
         stage('Clone Backend Repository for DEV environment') {
             agent { label 'debian' }
             steps {
                 git branch: 'main', url: 'https://github.com/benyer10repo/backendm8.git'
-                echo 'Cloned Backend Project'
+                sh 'echo "clonación finalizada"'
             }
         }
         stage('Build backend for DEV with docker-compose') {
             agent { label 'debian' }
             steps {
                 sh 'docker-compose up -d'
-                echo 'Build DEV backend'
+                
             }
         }/*
         stage('Clone Frontend Repository for DEV environment') {
