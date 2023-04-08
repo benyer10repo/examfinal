@@ -15,7 +15,7 @@ pipeline {
                 sh 'docker-compose up -d'
                 echo 'Build DEV backend'
             }
-        }
+        }/*
         stage('Clone Frontend Repository for DEV environment') {
             agent { label 'debian' }
             steps {
@@ -58,6 +58,6 @@ pipeline {
                 sh 'docker-compose up -d frontend-prod'
                 echo 'Build PROD frontend'
             }
-        }
+        }*/
     }
 }
