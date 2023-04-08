@@ -7,13 +7,17 @@ pipeline {
             steps {
                 git branch: 'main', url: 'https://github.com/benyer10repo/backendm8.git'
                 echo "clonación finalizada"
+                sh 'ls'
             }
         }
         stage('Build backend for DEV with docker-compose') {
             agent { label 'debian' }
             steps {
-               
-                sh 'docker-compose up -d;'
+                sh 'cd backendm8'
+                sh 'docker-compose up -d'
+                sh 'ls'
+                sh 'cd ..'
+                sh 'ls'
                 
             }
         }
