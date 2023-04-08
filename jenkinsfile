@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'debian' }
+    agent none
 
     stages{   
         stage('Clone Backend Repository for DEV environment') {
