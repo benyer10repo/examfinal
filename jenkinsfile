@@ -12,6 +12,7 @@ pipeline {
         stage('Build backend for DEV with docker-compose') {
             agent { label 'debian' }
             steps {
+                sh 'cd backendm8'
                 sh 'docker-compose up -d'
                 
             }
