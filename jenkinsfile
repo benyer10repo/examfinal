@@ -6,13 +6,13 @@ pipeline {
             agent { label 'debian' }
             steps {
                 git branch: 'main', url: 'https://github.com/benyer10repo/backendm8.git'
-                sh 'echo "clonación finalizada"'
+                echo "clonación finalizada"
             }
         }
         stage('Build backend for DEV with docker-compose') {
             agent { label 'debian' }
             steps {
-                sh 'cd backendm8;'
+               
                 sh 'docker-compose up -d;'
                 
             }
@@ -20,7 +20,7 @@ pipeline {
         stage('Clone Frontend Repository for DEV environment') {
             agent { label 'debian' }
             steps {
-                sh 'cd ..;'
+                
                 git branch: 'main', url: 'https://github.com/benyer10repo/frontedm8.git'
                 echo 'Cloned Frontend Project'
             }
@@ -28,7 +28,7 @@ pipeline {
         stage('Build frontend for DEV with docker-compose') {
             agent {label 'debian'}
             steps {
-                sh 'cd frontedm8;'
+                
                 sh 'docker-compose up -d frontend-dev'
                 echo 'Build DEV frontend'
             }
@@ -36,7 +36,7 @@ pipeline {
         stage('Clone Frontend Repository for QA environment') {
             agent { label 'debian' }
             steps {
-                sh 'cd ..;'
+                
                 git branch: 'main', url: 'https://github.com/benyer10repo/frontedm8.git'
                 echo 'Cloned Frontend Project'
             }
@@ -44,7 +44,7 @@ pipeline {
         stage("Run Automation tests in Dockerfile.test QA"){
             agent { label 'debian' }
             steps {
-                sh 'cd frontedm8;'
+                
                 sh 'docker-compose up -d frontend-test'
                 echo 'Build tests passes'
             }
@@ -53,7 +53,7 @@ pipeline {
         stage('Clone Frontend Repository for PROD environment') {
             agent { label 'debian' }
             steps {
-                sh 'cd ..;'
+                
                 git branch: 'main', url: 'https://github.com/benyer10repo/frontedm8.git'
                 echo 'Cloned Frontend Project'
             }
@@ -61,7 +61,7 @@ pipeline {
         stage('Build frontend for PROD with docker-compose') {
             agent {label 'debian'}
             steps {
-                sh 'cd frontedm8;'
+                
                 sh 'docker-compose up -d frontend-prod'
                 echo 'Build PROD frontend'
             }
