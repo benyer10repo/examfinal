@@ -1,20 +1,79 @@
-pipeline {
+pipeline 
+{
     agent none
-
-    stages{   
-        stage('Clone Backend Repository for DEV environment') {
+    stages
+    {
+        stage('Clonación del Repositorio Backend - DEV environment')
+        {
             agent { label 'debian' }
-            steps {
+            steps
+            {
                 git branch: 'main', url: 'https://github.com/benyer10repo/backendm8.git'
-                echo "clonación finalizada"
+                echo "clonación de Backend finalizada"
             }
         }
-        stage('Build backend for DEV with docker-compose') {
+        stage('Build backend for DEV with docker-compose')
+        {
             agent { label 'debian' }
-            steps {
+            steps
+            {
                 sh 'docker-compose up -d'
+                echo "build DEV Backed"
             }
         }
-        
+        stage('Clonación del Repositorio Frontend - DEV environment')
+        {
+            agent { label 'debian' }
+            steps
+            {
+                git branch: 'main', url: 'https://github.com/benyer10repo/frontedm8.git'
+                echo "Clonación de Frontend finalizada"
+            }
+        }
+        stage('Build frontend for DEV with docker-compose')
+        {
+            agent {label 'debian'}
+            steps
+            {
+                sh 'docker-compose up -d frontend-dev'
+                echo "Build DEV frontend"
+            }
+        }
+        stage('Clonación del Repositorio - QA environment')
+        {
+            agent { label 'debian' }
+            steps
+            {
+                git branch: 'main', url: 'https://github.com/benyer10repo/frontedm8.git'
+                echo "Clonación de Frontend finalizada"
+            }
+        }
+        stage("Run Automation tests in Dockerfile.test QA")
+        {
+            agent { label 'debian' }
+            steps
+            {
+                sh 'docker-compose up -d frontend-test'
+                echo 'Build tests passes'
+            }
+        }
+        stage('Clonación del Repositorio - PROD environment')
+        {
+            agent { label 'debian' }
+            steps
+            {
+                git branch: 'main', url: 'https://github.com/benyer10repo/frontedm8.git'
+                echo 'Clonación de Frontend finalizada'
+            }
+        }
+        stage('Build frontend for PROD with docker-compose')
+        {
+            agent {label 'debian'}
+            steps
+            {
+                sh 'docker-compose up -d frontend-prod'
+                echo 'Build PROD frontend'
+            }
+        }
     }
 }
