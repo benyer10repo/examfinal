@@ -17,7 +17,7 @@ pipeline
             agent { label 'debian' }
             steps
             {
-                sh 'docker-compose up -d'
+                sh 'docker-compose up -d app'
                 echo "build DEV Backed"
             }
         }
